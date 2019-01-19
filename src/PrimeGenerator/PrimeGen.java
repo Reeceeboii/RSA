@@ -66,5 +66,4 @@ public class PrimeGen {
         return q;
     }
 
-
 }
