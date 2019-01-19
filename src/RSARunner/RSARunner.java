@@ -12,7 +12,7 @@ public class RSARunner {
     public static void main(String[] args){
         // pass true into primeGen for test values of 2 and 7 so the maths is easier to follow
         // primeGen class generates two arbitrarily large prime numbers, p and q
-        PrimeGen primeGen = new PrimeGen(true);
+        PrimeGen primeGen = new PrimeGen(false);
         GCD euclidean = new GCD();
         Encrypt enc = new Encrypt();
         Decrypt dec = new Decrypt();
@@ -83,8 +83,6 @@ public class RSARunner {
 
 
 
-
-
-
+        
     }
 }
