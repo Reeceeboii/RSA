@@ -1,20 +1,28 @@
 package RSARunner;
 
+import EuclideanGCD.GCD;
 import PrimeGenerator.PrimeGen;
 
 import java.math.BigInteger;
 
 public class RSARunner {
     public static void main(String[] args){
-        // rsaRunner generates two large primes, p and q
         // pass true into primeGen for test values of 2 and 7 so the maths is easier to follow
-        PrimeGen primeGen = new PrimeGen(true);
+        // primeGen class generates two arbitrarily large prime numbers, p and q
+        PrimeGen primeGen = new PrimeGen(false);
+        GCD euclidean = new GCD();
+
+        BigInteger[] publicKey = new BigInteger[2];
+        BigInteger[] privateKey = new BigInteger[2];
+
 
         System.out.println("P is: " + primeGen.getP());
         System.out.println("q is: " + primeGen.getQ());
 
         // n = pq, it becomes the modulus component of both the private and public key
         BigInteger n = primeGen.getP().multiply(primeGen.getQ());
+        publicKey[1] = n;
+        privateKey[1] = n;
 
         System.out.println("n is: " + n + "(" + n.bitCount() + " bits)");
 
@@ -24,8 +32,29 @@ public class RSARunner {
 
         System.out.println("n has " + phi + " co-primes");
 
-        BigInteger e = new BigInteger("1");
-        
+        BigInteger e = new BigInteger("2");
+        while(e.compareTo(phi) == -1){
+            BigInteger gcd = euclidean.gcd(e, phi);
+            if(gcd.equals(BigInteger.ONE)){
+                break;
+            }else{
+                e = e.add(BigInteger.ONE);
+            }
+        }
+
+        System.out.println("e: " + e);
+        publicKey[0] = e;
+
+        BigInteger k = BigInteger.TWO;
+        BigInteger d = (BigInteger.ONE.add(k.multiply(phi))).divide(publicKey[0]);
+
+        privateKey[0] = d;
+
+        System.out.println("Public key: (" + publicKey[0] + "," + publicKey[1] + ")");
+        System.out.println("Private key: (" + privateKey[0] + "," + privateKey[1] + ")");
+
+
+
 
     }
 
