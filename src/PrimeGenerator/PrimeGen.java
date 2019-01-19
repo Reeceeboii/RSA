@@ -32,7 +32,7 @@ public class PrimeGen {
     private BigInteger generateNewValue(){
         Random rand = new Random();
         // TODO make this value a lot bigger when stuff works
-        BigInteger upperLimit = new BigInteger("100000000000000000");
+        BigInteger upperLimit = new BigInteger("1000000000");
         BigInteger returnVal;
         do{
             returnVal = new BigInteger(upperLimit.bitLength(), rand);

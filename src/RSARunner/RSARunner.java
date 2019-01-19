@@ -57,7 +57,7 @@ public class RSARunner {
         System.out.println("Public key: (" + publicKey[0] + "," + publicKey[1] + ")");
         System.out.println("Private key: (" + privateKey[0] + "," + privateKey[1] + ")");
 
-        String plaintextstr = "Reece";
+        String plaintextstr = "Encrypt.";
         System.out.println("\nPlain text: " + plaintextstr);
 
         char[] plaintext = plaintextstr.toCharArray();
@@ -74,14 +74,18 @@ public class RSARunner {
         System.out.println();
         message = enc.encrypt(message,publicKey);
 
-        System.out.print("encrypted text as values: ");
+        System.out.print("encrypted message: ");
         for(BigInteger value: message){
-            System.out.print(value + " ");
+            System.out.print(value);
         }
 
+        ArrayList<BigInteger> decryptedMessage = dec.decrypt(message, privateKey);
 
-
-
+        System.out.println();
+        System.out.print("Decrypted text: ");
+        for(BigInteger value: decryptedMessage){
+            System.out.print(value + " ");
+        }
 
         
     }
