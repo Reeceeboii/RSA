@@ -64,7 +64,7 @@ public class RSARunner {
             message.add(BigInteger.valueOf((int)plaintext[i]));
         }
 
-        System.out.print("plain text as values: ");
+        System.out.print("Plain text as values: ");
         for(BigInteger value: message){
             System.out.print(value + " ");
         }
@@ -72,7 +72,7 @@ public class RSARunner {
         System.out.println();
         message = enc.encrypt(message,publicKey);
 
-        System.out.print("encrypted message: ");
+        System.out.print("Encrypted message: ");
         for(BigInteger value: message){
             System.out.print(value);
         }
@@ -80,9 +80,16 @@ public class RSARunner {
         ArrayList<BigInteger> decryptedMessage = dec.decrypt(message, privateKey);
 
         System.out.println();
-        System.out.print("Decrypted text: ");
+        System.out.print("Decrypted values: ");
         for(BigInteger value: decryptedMessage){
             System.out.print(value + " ");
+        }
+
+        System.out.println();
+        System.out.print("Decrypted values as text: ");
+        for(BigInteger value: decryptedMessage){
+            int intValue = value.intValue();
+            System.out.print((char)intValue);
         }
 
         
