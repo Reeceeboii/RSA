@@ -9,8 +9,8 @@ public class PrimeGen {
     private BigInteger p;
     private BigInteger q;
 
-    public PrimeGen(boolean test){
-        if(!test) {
+    public PrimeGen(boolean useBigInt){
+        if(!useBigInt) {
             boolean prime1Chosen = false;
             boolean prime2Chosen = false;
 
@@ -24,15 +24,16 @@ public class PrimeGen {
                 prime2Chosen = checkPrimality(q);
             }
         }else{
-            p = new BigInteger("2");
-            q = new BigInteger("7");
+            Random rand = new Random();
+            p = BigInteger.probablePrime(512, rand);
+            q = BigInteger.probablePrime(512, rand);
         }
     }
 
     private BigInteger generateNewValue(){
         Random rand = new Random();
         // TODO make this value a lot bigger when stuff works
-        BigInteger upperLimit = new BigInteger("1000000000");
+        BigInteger upperLimit = new BigInteger("1000000");
         BigInteger returnVal;
         do{
             returnVal = new BigInteger(upperLimit.bitLength(), rand);

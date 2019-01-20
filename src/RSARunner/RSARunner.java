@@ -7,12 +7,13 @@ import PrimeGenerator.PrimeGen;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class RSARunner {
     public static void main(String[] args){
-        // pass true into primeGen for test values of 2 and 7 so the maths is easier to follow
         // primeGen class generates two arbitrarily large prime numbers, p and q
-        PrimeGen primeGen = new PrimeGen(false);
+        // pass true into primeGen to use the BigInteger's probablePrime method.
+        PrimeGen primeGen = new PrimeGen(true);
         GCD euclidean = new GCD();
         Encrypt enc = new Encrypt();
         Decrypt dec = new Decrypt();
@@ -28,13 +29,11 @@ public class RSARunner {
         publicKey[1] = n;
         privateKey[1] = n;
 
-        System.out.println("n is: " + n + "(" + n.bitCount() + " bits)");
+        System.out.println("n is: " + n.bitCount() + " bits");
 
         // phi function is used to calculate the number of co-primes
         BigInteger one = BigInteger.ONE;
         BigInteger phi = (primeGen.getP().subtract(one)).multiply(primeGen.getQ().subtract(one));
-
-        System.out.println("n has " + phi + " co-primes");
 
         BigInteger e = new BigInteger("2");
         while(e.compareTo(phi) == -1){
@@ -46,7 +45,6 @@ public class RSARunner {
             }
         }
 
-        System.out.println("e: " + e);
         publicKey[0] = e;
 
         BigInteger k = BigInteger.TWO;
@@ -57,7 +55,7 @@ public class RSARunner {
         System.out.println("Public key: (" + publicKey[0] + "," + publicKey[1] + ")");
         System.out.println("Private key: (" + privateKey[0] + "," + privateKey[1] + ")");
 
-        String plaintextstr = "Encrypt.";
+        String plaintextstr = "My name is Reece";
         System.out.println("\nPlain text: " + plaintextstr);
 
         char[] plaintext = plaintextstr.toCharArray();
